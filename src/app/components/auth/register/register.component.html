@@ -1,0 +1,116 @@
+<div>
+  <form
+    id="accesspanel"
+    [formGroup]="registrationForm"
+    (ngSubmit)="submitForm()"
+    autocomplete="off"
+  >
+    <h1 class="text-center">Memo Kart</h1>
+    <div class="inset">
+      <div class="w-full" style="display: flex; flex-direction: row; gap: 10px">
+      <mat-form-field class="w-full">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required />
+        <mat-error *ngIf="registrationForm.controls['firstName'].invalid">
+          @if(registrationForm.controls['firstName'].hasError('pattern')) {
+          <span style="font-size: 10px;">First name should contain only letters</span>
+          }
+          @if(registrationForm.controls['firstName'].hasError('required')){
+          <span style="font-size: 10px;">First name is required</span>
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required />
+        <mat-error *ngIf="registrationForm.controls['lastName'].invalid">
+          @if(registrationForm.controls['lastName'].hasError('pattern')) {
+          <span style="font-size: 10px;">Last name should contain only letters</span>
+          }
+          @if(registrationForm.controls['lastName'].hasError('required')){
+          <span style="font-size: 10px;">Last name is required</span>
+          }
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+      <mat-form-field class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required email />
+        <mat-error> 
+        @if(registrationForm.controls['email'].hasError('required')){
+        <span style="font-size: 10px;">Email is required</span>
+      } @if(registrationForm.controls['email'].hasError('email')){
+        <span style="font-size: 10px;">Please enter a valid email address </span>
+      }
+      </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="w-full">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput formControlName="mobile" required />
+        <mat-error *ngIf="registrationForm.controls['mobile'].invalid">
+          @if(registrationForm.controls['mobile'].hasError('pattern')) {
+          <span  style="font-size: 10px;">Phone number should contain only numbers</span>
+          }
+          @else if(registrationForm.controls['mobile'].hasError('required')){
+          <span  style="font-size: 10px;">Phone number is required</span>
+          }
+          @else if(registrationForm.controls['mobile'].hasError('minlength')){
+          <span  style="font-size: 10px;">Phone number should not be less than 10 digits</span>
+          }
+          @else if(registrationForm.controls['mobile'].hasError('maxlength')){
+          <span style="font-size: 10px;">Phone number should not exceed 10 digits</span>
+          }
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="w-full">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          type="password"
+          required
+          minlength="8"
+        />
+        <mat-error>
+        @if(registrationForm.controls['password'].hasError('required')){
+        <span style="font-size: 10px;"> Password is required </span>
+        } @if(registrationForm.controls['password'].hasError('minlength')){
+        <span style="font-size: 10px;"> Password should be at least 8 characters long </span>
+        }
+        @if(registrationForm.controls['password'].hasError('pattern')){
+          {{this.setErrorMessage("Password needs 1 uppercase [A-Z], 1 lowercase [a-z], 1 number [0-9], and 1 special character!")}}
+        }
+        @if(!registrationForm.controls['password'].invalid){
+          {{this.setErrorMessage("")}}
+        }
+      </mat-error>
+      </mat-form-field>
+      <div *ngIf="errorMessage" 
+        style="font-size: 11px; color: red; margin: 5px 10px"
+      >{{ errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1) }}</div>
+      <div class="">
+        <button
+          class="w-full border"
+          style="padding: 1.7rem"
+          type=""
+          mat-raised-button
+          color="accent"
+        >
+          REGISTER
+        </button>
+      </div>
+      <div class="flex items-center space-x-3 justify-center my-10">
+        <span>if you have already account ?</span>
+        <button class="" mat-button color="accent" (click)="changeTemplate()">
+          LOGIN
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<div
+style="padding:0 10px !important"     
+  class="box hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col items-center rounded-lg  overflow-hidden w-[13rem] lg:w-[15rem] "
+>
+  <div class="lg:h-[18rem] h-[10rem] w-[10rem] lg:w-[15rem]">
+ 
+    <img
+    loading="lazy"
+      class="object-cover object-top w-full h-full"
+      [src]="product.imageUrl"
+      [alt]='product.id' 
+      onerror="this.src = '/assets/products/product' + this.getAttribute('alt') + '.png'"
+      style="border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem"
+    />
+  </div>
+
+  <div class="p-4 ">
+    <h3 class=" font-medium text-gray-900 text-sm">
+      <!-- {product?.brand || product?.title} -->
+      {{product.brand}}
+    </h3>
+    <p class="mt-2 text-sm text-gray-500">
+      <!-- {product?.title} -->
+     {{product.title}}
+    </p>
+  </div>
+</div>

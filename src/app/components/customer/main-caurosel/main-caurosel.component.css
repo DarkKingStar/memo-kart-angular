@@ -1,0 +1,66 @@
+.carousel {
+    display: flex;
+    height: 80.2vh;
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-btn-container{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 99;
+  }
+  
+  .carousel-btn-container button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-shadow: -0.3px -0.3px 0 #000, 0.3px -0.3px 0 #000, -0.3px 0.3px 0 #000, 0.3px 0.3px 0 #000;
+    cursor: pointer;
+    padding: 0  0.5rem;
+  }
+  .carousel-btn-container button .icon-display{
+    transform: scale(3);
+  }
+  
+  .dots-container{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding-bottom: 20px;
+    width: 100%;
+    z-index: 99;
+  }
+  .dots-container .dot{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid black;
+    background-color: #ffffff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    box-shadow: none;
+  }
+  .dots-container .dot.active{
+    background-color: #ffffff;
+    box-shadow: rgba(255, 187, 0, 0.4) -1px 1px inset, rgba(255, 187, 0, 0.3) -2px 2px inset, rgba(255, 162, 0, 0.2) -3px 3px inset, rgba(255, 230, 0, 0.1) -4px 4px inset, rgba(255, 187, 0, 0.05) -5px 5px inset;
+  }

@@ -1,0 +1,201 @@
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-12 px-5 lg:px-20">
+  <div class="col-span-1 lg:col-span-5">
+    <div
+      class="rounded-md border shadow-md lg:h-[32.2rem] overflow-y-auto hide-scrollbar box py-5"
+    >
+      <!-- Iterate over addresses -->
+
+      @for(item of adresses; track item; let last=$last){
+      <div class="p-5 py-7 cursor-pointer">
+        <div class="py-2 space-y-2">
+          <app-adress-card [address]="item" />
+          <button
+            style="padding: 1.6rem"
+            mat-raised-button
+            color="accent"
+            (click)="handleCreateOrder(item)"
+          >
+            Deliver Here
+          </button>
+          @if(!last){
+          <mat-divider></mat-divider>
+          }
+        </div>
+      </div>
+      }@empty{
+      <div class="h-full flex justify-center items-center">
+        <h1 class="font-semibold">no addresses saved</h1>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="col-span-1 lg:col-span-7">
+    <div class="rounded-md shadow-md p-5 box">
+      <form [formGroup]="myForm" (ngSubmit)="handleSubmit()" class="">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div class="col-span-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                formControlName="firstName"
+                placeholder="First Name"
+                autocomplete="given-name"
+                required
+              />
+              <mat-error *ngIf="myForm.controls['firstName'].invalid">
+                @if(myForm.controls['firstName'].hasError('pattern')) {
+                <span>First name should contain only letters</span>
+                }
+                @if(myForm.controls['firstName'].hasError('required')){
+                <span>First name is required</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-1">
+            <mat-form-field appearance="fill" class="w-full removeOutline">
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                formControlName="lastName"
+                placeholder="Last Name"
+                autocomplete="given-name"
+                required
+                class="py-8 bg-transparent bg-black"
+              />
+              <mat-error *ngIf="myForm.controls['lastName'].invalid">
+                @if(myForm.controls['lastName'].hasError('pattern')) {
+                <span>Last name should contain only letters</span>
+                }
+                @if(myForm.controls['lastName'].hasError('required')){
+                <span>Last name is required</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-2">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Address</mat-label>
+              <textarea
+                matInput
+                formControlName="streetAddress"
+                placeholder="Address"
+                autocomplete="shipping address"
+                rows="4"
+                required
+              ></textarea>
+              <mat-error *ngIf="myForm.controls['streetAddress'].invalid">
+                @if(myForm.controls['streetAddress'].hasError('required')){
+                <span>Street Address is required</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>City</mat-label>
+              <input
+                matInput
+                formControlName="city"
+                placeholder="City"
+                autocomplete="shipping address-level2"
+                required
+              />
+              <mat-error *ngIf="myForm.controls['city'].invalid">
+                @if(myForm.controls['city'].hasError('pattern')) {
+                <span>City name should contain only letters and spaces</span>
+                }
+                @if(myForm.controls['city'].hasError('required')){
+                <span>City name is required</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>State/Province/Region</mat-label>
+              <input
+                matInput
+                formControlName="state"
+                placeholder="State/Province/Region"
+                required
+              />
+              <mat-error *ngIf="myForm.controls['state'].invalid">
+                @if(myForm.controls['state'].hasError('pattern')) {
+                <span>This should contain only letters and spaces</span>
+                }
+                @if(myForm.controls['state'].hasError('required')){
+                <span>This is required</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Zip / Postal code</mat-label>
+              <input
+                matInput
+                formControlName="zipCode"
+                placeholder="Zip / Postal code"
+                autocomplete="shipping postal-code"
+                required
+              />
+              <mat-error *ngIf="myForm.controls['zipCode'].invalid">
+                @if(myForm.controls['zipCode'].hasError('pattern')) {
+                <span>Zip code should contain only numbers</span>
+                }
+                @if(myForm.controls['zipCode'].hasError('required')){
+                <span>Zip code is required</span>
+                }
+                @if(myForm.controls['zipCode'].hasError('maxlength')){
+                <span>Zip code should not exceed 6 digits</span>
+                }
+                @if(myForm.controls['zipCode'].hasError('minlength')){
+                <span>Zip code should not be less than 6 digits</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-1">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                formControlName="mobile"
+                placeholder="Phone Number"
+                autocomplete="tel"
+                required
+              />
+              <mat-error *ngIf="myForm.controls['mobile'].invalid">
+                @if(myForm.controls['mobile'].hasError('pattern')) {
+                <span>Phone number should contain only numbers</span>
+                }
+                @if(myForm.controls['mobile'].hasError('required')){
+                <span>Phone number is required</span>
+                }
+                @if(myForm.controls['mobile'].hasError('minlength')){
+                <span>Phone number should not be less than 10 digits</span>
+                }
+                @if(myForm.controls['mobile'].hasError('maxlength')){
+                <span>Phone number should not exceed 10 digits</span>
+                }
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-span-2">
+            <button
+              class="w-full"
+              style="padding: 1.6rem"
+              type="submit"
+              mat-raised-button
+              color="accent"
+            >
+              Deliver Here
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
